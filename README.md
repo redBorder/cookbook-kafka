@@ -19,7 +19,8 @@ cookbook to install and configure redborder Kafka
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-## License and Authors
+## License
+GNU AFFERO GENERAL PUBLIC LICENSE
 
+## Authors
 Authors: Enrique Jimenez <ejimenez@redborder.com>
-
