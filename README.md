@@ -20,7 +20,7 @@ cookbook to install and configure redborder Kafka
 6. Submit a Pull Request using Github
 
 ## License
-GNU AFFERO GENERAL PUBLIC LICENSE
+GNU AFFERO GENERAL PUBLIC LICENSE VERSION 3
 
 ## Authors
 Authors: Enrique Jimenez <ejimenez@redborder.com>
