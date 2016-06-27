@@ -141,7 +141,7 @@ action :remove do
   
     # removing templates
     template_list.each do |temp|
-      template "/opt/rb/etc/kafka/brokers.list" do
+      file "/opt/rb/etc/kafka/brokers.list" do
         action :delete
       end
     end
