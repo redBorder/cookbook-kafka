@@ -21,7 +21,7 @@
 
 listen=*
 advertised.host.name=<%= node.name %>
-broker.id=<%= @manager_index.nil? ? "?" : "#{@manager_index}" %>
+broker.id=<%= @host_index.nil? ? "?" : "#{@host_index}" %>
 port=9092
 max.socket.request.bytes=104857600
 log.dir=/tmp/kafka
@@ -37,7 +37,7 @@ log.cleanup.interval.mins=10
 log.segment.bytes=<%= [ [ maxbytes/8, 1073741824 ].min, 1024 * 1024 ].max  %>
 log.retention.hours=120
 log.retention.bytes=<%= maxbytes.to_s %>
-default.replication.factor=<%= @managers.size <= 1 ? 1 : 2 %>
+default.replication.factor=<%= @managers_list.size <= 1 ? 1 : 2 %>
 <% if !@zk_hosts.nil? and @zk_hosts!="" %>
 zookeeper.connect=<%= @zk_hosts %>
 zookeeper.connection.timeout.ms=12000

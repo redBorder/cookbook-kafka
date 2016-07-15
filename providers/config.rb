@@ -10,8 +10,13 @@ action :add do
     user = new_resource.user
     group = new_resource.group
     zk_hosts = new_resource.zk_hosts
+    host_index = new_resource.host_index
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
+
+    package "confluent-kafka-2.11" do
+      action :install
+    end
 
 #    service "kafka" do
 #        service_name "kafka"
@@ -101,17 +106,17 @@ action :add do
       mode 0644
       retries 2
 #      notifies :restart, "service[kafka]", :delayed
-#     variables(:managers_list => managers_list, :manager_index => manager_index, :zk_hosts => zk_hosts, :maxsize => hd_services["kafka"] )
+     variables(:managers_list => managers_list, :host_index => host_index, :zk_hosts => zk_hosts, :maxsize => maxsize )
     end
 
-    template "/opt/rb/etc/kafka/brokers.list" do
+    template "/etc/kafka/brokers.list" do
       source "kafka_brokers.list.erb"
       owner "root"
       group "root"
       cookbook "kafka"
       mode 0644
       retries 2
-    #  variables(:managers => managers_per_service["kafka"])
+      variables(:managers_list => managers_list)
     #  notifies :restart, "service[kafka]", :delayed if manager_services["kafka"] and manager_index>=0
     end
     
@@ -124,7 +129,7 @@ end
 action :remove do
   begin
     template_list = [
-                     "/opt/rb/etc/kafka/brokers.list",
+                     "/etc/kafka/brokers.list",
                      "/etc/kafka/server.properties",
                      "/etc/kafka/tools-log4j.properties",
                      "/etc/sysconfig/kafka",

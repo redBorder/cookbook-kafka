@@ -6,3 +6,9 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+#
+
+kafka_config "Kafka node configuration" do
+  action :add
+end
+
