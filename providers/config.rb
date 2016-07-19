@@ -11,6 +11,7 @@ action :add do
     group = new_resource.group
     zk_hosts = new_resource.zk_hosts
     host_index = new_resource.host_index
+    port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
 
@@ -18,10 +19,14 @@ action :add do
       action :install
     end
 
-#    service "kafka" do
-#        service_name "kafka"
-#        supports :status => true, :reload => true, :restart => true, :start => true, :enable => true
-#    end
+    package "bc" do
+      action :install
+    end
+
+    service "kafka" do
+        service_name "kafka"
+        supports :status => true, :reload => true, :restart => true, :start => true, :enable => true
+    end
 
     user user do
       action :create
@@ -33,7 +38,6 @@ action :add do
       mode 0770
       action :create
     end
-
 
     directory "/tmp/kafka" do
       owner user
@@ -65,7 +69,7 @@ action :add do
       mode 0644
       cookbook "kafka"
       retries 2
-#      notifies :restart, "service[kafka]", :delayed 
+      notifies :restart, "service[kafka]", :delayed 
     end
 
     template "/etc/kafka/producer.properties" do
@@ -75,7 +79,7 @@ action :add do
       cookbook "kafka"
       mode 0644
       retries 2
-      variables(:managers_list => managers_list)
+      variables(:managers_list => managers_list, :port => port)
     end  
 
      template "/etc/sysconfig/kafka" do
@@ -86,7 +90,7 @@ action :add do
         mode 0644
         retries 2
         variables(:memory => memory)
-#        notifies :restart, "service[kafka]", :delayed 
+        notifies :restart, "service[kafka]", :delayed 
     end
 
     template "/etc/kafka/tools-log4j.properties" do
@@ -105,7 +109,7 @@ action :add do
       cookbook "kafka"
       mode 0644
       retries 2
-#      notifies :restart, "service[kafka]", :delayed
+      notifies :restart, "service[kafka]", :delayed
      variables(:managers_list => managers_list, :host_index => host_index, :zk_hosts => zk_hosts, :maxsize => maxsize )
     end
 
@@ -116,10 +120,14 @@ action :add do
       cookbook "kafka"
       mode 0644
       retries 2
-      variables(:managers_list => managers_list)
-    #  notifies :restart, "service[kafka]", :delayed if manager_services["kafka"] and manager_index>=0
+      variables(:managers_list => managers_list, :port => port)
+      notifies :restart, "service[kafka]", :delayed if manager_services["kafka"] and manager_index>=0
     end
-    
+   
+    service "kafka" do
+      action :enable, :start
+    end
+ 
     Chef::Log.info("Kafka has been configurated correctly.")
   rescue => e
     Chef::Log.error(e.message)
@@ -128,6 +136,15 @@ end
 
 action :remove do
   begin
+
+    logdir = new_resource.logdir
+    host_index = new_resource.host_index
+
+    service "kafka" do
+      supports :stop => true
+      action :stop
+    end
+
     template_list = [
                      "/etc/kafka/brokers.list",
                      "/etc/kafka/server.properties",
@@ -146,7 +163,7 @@ action :remove do
   
     # removing templates
     template_list.each do |temp|
-      file "/opt/rb/etc/kafka/brokers.list" do
+      file temp do
         action :delete
       end
     end
@@ -155,6 +172,7 @@ action :remove do
     dir_list.each do |dirs|
       directory dirs do
         action :delete
+        recursive true
       end
     end
      Chef::Log.info("Kafka has been deleted correctly.")

@@ -15,6 +15,6 @@
 # see kafka.consumer.ConsumerConfig for more details
 
 # zk connection string
-zookeeper.connect=<%= (!@zk_hosts.nil? and @zk_hosts!="") ? @zk_hosts : "127.0.0.1:2181" %>
+zookeeper.connect=<%= @zk_hosts %>
 zookeeper.connection.timeout.ms=1000000
 zookeeper.session.timeout.ms=1000000

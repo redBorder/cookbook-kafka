@@ -11,8 +11,7 @@ attribute :logdir, :kind_of => String, :default => "/var/log/kafka"
 attribute :user, :kind_of => String, :default => "kafka"
 attribute :group, :kind_of => String, :default => "kafka"
 attribute :host_index, :kind_of => Fixnum, :default => 0
-attribute :zk_hosts, :kind_of => Array, :default => ["localhost"]
-attribute :zk_port, :kind_of => Fixnum, :default => 2181
+attribute :zk_hosts, :kind_of => String, :default => "localhost:2181"
 attribute :managers_list, :kind_of => Array, :default => ["localhost"]
 attribute :port, :kind_of => Fixnum, :default => 9092
 attribute :maxsize, :kind_of => Float, :default => 1024.0
