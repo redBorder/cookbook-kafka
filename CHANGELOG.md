@@ -1,5 +1,8 @@
 # kafka CHANGELOG
 
+## 0.0.4
+ [ejimenez] - Fixed bug in brokers.list creation
+
 ## 0.0.3
  [ejimenez] 
 - fixed problem in kafka-consumer and zk_hosts

@@ -121,7 +121,7 @@ action :add do
       mode 0644
       retries 2
       variables(:managers_list => managers_list, :port => port)
-      notifies :restart, "service[kafka]", :delayed if manager_services["kafka"] and manager_index>=0
+      notifies :restart, "service[kafka]", :delayed if host_index>=0
     end
    
     service "kafka" do

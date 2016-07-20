@@ -18,7 +18,7 @@
 
 # list of brokers used for bootstrapping knowledge about the rest of the cluster
 # format: host1:port1,host2:port2 ...
-metadata.broker.list= <%= @managers_list.map{|manager| "#{manager}:#{@port}"}.join(',') %>
+metadata.broker.list=<%= @managers_list.map{|manager| "#{manager}:#{@port}"}.join(',') %>
 
 # name of the partitioner class for partitioning events; default partition spreads data randomly
 #partitioner.class=
