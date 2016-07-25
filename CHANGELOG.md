@@ -1,5 +1,12 @@
 # kafka CHANGELOG
 
+## 0.0.5
+ [ejimenez] 
+- Changed permissions to kafka user and group
+- typo on service resource sintax
+- Fixed permissions in kafka dirs
+- Fixed typo on memory assignation in sysconfig kafka
+
 ## 0.0.4
  [ejimenez] - Fixed bug in brokers.list creation
 

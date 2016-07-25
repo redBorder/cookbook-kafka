@@ -42,20 +42,20 @@ action :add do
     directory "/tmp/kafka" do
       owner user
       group group
-      mode 0700
+      mode 0755
       action :create
     end
 
     directory "/etc/kafka" do
-      owner owner
+      owner user
       group group 
-      mode 0700
+      mode 0755
     end
 
     template "/etc/kafka/consumer.properties" do
       source "kafka_consumer.properties.erb"
-      owner "root"
-      group "root"
+      owner user
+      group group
       cookbook "kafka"
       mode 0644
       retries 2
@@ -64,8 +64,8 @@ action :add do
 
     template "/etc/kafka/log4j.properties" do
       source "kafka_log4j.properties.erb"
-      owner "root"
-      group "root"
+      owner user
+      group group
       mode 0644
       cookbook "kafka"
       retries 2
@@ -74,8 +74,8 @@ action :add do
 
     template "/etc/kafka/producer.properties" do
       source "kafka_producer.properties.erb"
-      owner "root"
-      group "root"
+      owner user
+      group group
       cookbook "kafka"
       mode 0644
       retries 2
@@ -84,8 +84,8 @@ action :add do
 
      template "/etc/sysconfig/kafka" do
         source "kafka_sysconfig.erb"
-        owner "root"
-        group "root"
+        owner user
+        group group
         cookbook "kafka"
         mode 0644
         retries 2
@@ -95,8 +95,8 @@ action :add do
 
     template "/etc/kafka/tools-log4j.properties" do
       source "kafka_tools-log4j.properties.erb"
-      owner "root"
-      group "root"
+      owner user
+      group group
       cookbook "kafka"
       mode 0644
       retries 2
@@ -104,8 +104,8 @@ action :add do
 
     template "/etc/kafka/server.properties" do
       source "kafka_server.properties.erb"
-      owner "root"
-      group "root"
+      owner  user
+      group group
       cookbook "kafka"
       mode 0644
       retries 2
@@ -115,8 +115,8 @@ action :add do
 
     template "/etc/kafka/brokers.list" do
       source "kafka_brokers.list.erb"
-      owner "root"
-      group "root"
+      owner user
+      group group
       cookbook "kafka"
       mode 0644
       retries 2
@@ -125,7 +125,7 @@ action :add do
     end
    
     service "kafka" do
-      action :enable, :start
+      action [ :enable, :start ]
     end
  
     Chef::Log.info("Kafka has been configurated correctly.")
