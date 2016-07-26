@@ -15,17 +15,9 @@ action :add do
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
 
-    package "confluent-kafka-2.11" do
-      action :install
-    end
-
-    package "bc" do
-      action :install
-    end
-
-    service "kafka" do
-        service_name "kafka"
-        supports :status => true, :reload => true, :restart => true, :start => true, :enable => true
+    yum_package "redborder-kafka" do
+      action :upgrade
+      flush_cache [ :before ]
     end
 
     user user do
@@ -123,11 +115,13 @@ action :add do
       variables(:managers_list => managers_list, :port => port)
       notifies :restart, "service[kafka]", :delayed if host_index>=0
     end
-   
+
     service "kafka" do
-      action [ :enable, :start ]
+      service_name "kafka"
+      supports :status => true, :reload => true, :restart => true, :start => true, :enable => true
+      action [:enable,:start]
     end
- 
+     
     Chef::Log.info("Kafka has been configurated correctly.")
   rescue => e
     Chef::Log.error(e.message)
@@ -175,7 +169,12 @@ action :remove do
         recursive true
       end
     end
-     Chef::Log.info("Kafka has been deleted correctly.")
+   
+    yum_package 'redborder-kafka' do
+      action :remove
+    end
+
+    Chef::Log.info("Kafka has been deleted correctly.")
   rescue => e
     Chef::Log.error(e.message)
   end

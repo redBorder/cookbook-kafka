@@ -1,5 +1,10 @@
 # kafka CHANGELOG
 
+## 0.0.6
+ [ejimenez]
+- Added redborder-kafka install
+- Added sysctl after package installation
+
 ## 0.0.5
  [ejimenez] 
 - Changed permissions to kafka user and group
