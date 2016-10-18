@@ -20,6 +20,7 @@ Source0: %{name}-%{version}.tar.gz
 mkdir -p %{buildroot}/var/chef/cookbooks/kafka
 cp -f -r  resources/* %{buildroot}/var/chef/cookbooks/kafka/
 chmod -R 0755 %{buildroot}/var/chef/cookbooks/kafka
+install -D -m 0644 README.md %{buildroot}/var/chef/cookbooks/kafka/README.md
 
 %pre
 
@@ -28,6 +29,8 @@ chmod -R 0755 %{buildroot}/var/chef/cookbooks/kafka
 %files
 %defattr(0755,root,root)
 /var/chef/cookbooks/kafka
+%defattr(0644,root,root)
+/var/chef/cookbooks/kafka/README.md
 
 %doc
 
