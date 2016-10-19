@@ -3,7 +3,7 @@
 # Resource:: config
 #
 
-actions :add, :remove
+actions :add, :remove, :register, :deregister
 default_action :add
 
 attribute :memory, :kind_of => Fixnum, :default => 524288
@@ -15,5 +15,3 @@ attribute :zk_hosts, :kind_of => String, :default => "localhost:2181"
 attribute :managers_list, :kind_of => Array, :default => ["localhost"]
 attribute :port, :kind_of => Fixnum, :default => 9092
 attribute :maxsize, :kind_of => Float, :default => 1024.0
-
-

@@ -4,3 +4,6 @@ default["kafka"]["group"] = "kafka"
 default["kafka"]["port"] = 9092
 default["kafka"]["zk_hosts"] = "localhost:2181"
 default["kafka"]["host_index"] = 0
+
+#Flags
+default["kafka"]["registered"] = false
