@@ -122,7 +122,7 @@ action :add do
       action [:enable,:start]
     end
 
-    Chef::Log.info("Kafka has been configurated correctly.")
+    Chef::Log.info("Kafka cookbook has been processed")
   rescue => e
     Chef::Log.error(e.message)
   end
@@ -174,7 +174,7 @@ action :remove do
       action :remove
     end
 
-    Chef::Log.info("Kafka has been deleted correctly.")
+    Chef::Log.info("Kafka cookbook has been processed")
   rescue => e
     Chef::Log.error(e.message)
   end
@@ -187,7 +187,7 @@ action :register do
       query["ID"] = "kafka-#{node["hostname"]}"
       query["Name"] = "kafka"
       query["Address"] = "#{node["ipaddress"]}"
-      query["Port"] = 4443
+      query["Port"] = 9092
       json_query = Chef::JSONCompat.to_json(query)
 
       execute 'Register service in consul' do
