@@ -14,6 +14,29 @@ action :add do
     port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
+    kafka_topics = ["rb_event", "rb_event_post"
+                    "rb_flow", "rb_flow_post", "rb_flow_discard", 
+                    "rb_monitor", "rb_monitor_post",
+                    "rb_loc", "rb_locne", "rb_loc_post", "rb_location",
+                    "rb_trap",
+                    "rb_mobile",
+                    "rb_radius",
+                    "rb_nmsp",
+                    "rb_social", "rb_social_post",
+                    "rb_hashtag", "rb_hashtag_post",
+                    "rb_malware", 
+                    "rb_mail",
+                    "rb_metrics",
+                    "rb_state", "rb_state_post",
+                    "rb_meraki",
+                    "rb_vault", "rb_vault_post",
+                    "rb_bi", "rb_bi_post",
+                    "rb_scanner", "rb_scanner_post", 
+                    "rb_http2k_sync",
+                    "rb_limits", 
+                    "rb_counters"
+                    "sflow"]
+
 
     yum_package "redborder-kafka" do
       action :upgrade
@@ -114,6 +137,16 @@ action :add do
       retries 2
       variables(:managers_list => managers_list, :port => port)
       notifies :restart, "service[kafka]", :delayed if host_index>=0
+    end
+
+    template "/etc/kafka/topics_definitions.yml" do
+      source "topics_definitions.yml.erb"
+      owner user
+      group group
+      cookbook "kafka"
+      mode 0644
+      retries 2
+      variables(:kafka_topics => kafka_topics, :managers_list => managers_list)
     end
 
     service "kafka" do
