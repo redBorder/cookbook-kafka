@@ -14,6 +14,8 @@ action :add do
     port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
+    
+    # Calculate kafka_topics that need to be created
     kafka_topics = ["rb_event", "rb_event_post",
                     "rb_flow", "rb_flow_post", "rb_flow_discard", 
                     "rb_monitor", "rb_monitor_post",
@@ -36,8 +38,21 @@ action :add do
                     "rb_limits", 
                     "rb_counters",
                     "sflow"]
-
-
+    namespaces              = []
+    Chef::Role.list.keys.each do |rol|
+      ro = Chef::Role.load rol
+      if ro and ro.override_attributes["redborder"] and ro.override_attributes["redborder"]["namespace"] and ro.override_attributes["redborder"]["namespace_uuid"] and !ro.override_attributes["redborder"]["namespace_uuid"].empty?
+        namespaces.push(ro.override_attributes["redborder"]["namespace_uuid"])
+      end
+    end   
+    namespaces.uniq!
+    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_social_post", "rb_hashtag_post", "rb_state_post", "rb_bi_post", "rb_scanner_post"]
+    namespaces.each do |ns|
+      topics_with_namespaces.each do |topic|
+        kafka_topics.push("#{topic}_#{ns}")
+      end
+    end
+     
     yum_package "redborder-kafka" do
       action :upgrade
       flush_cache [ :before ]
@@ -147,12 +162,27 @@ action :add do
       mode 0644
       retries 2
       variables(:kafka_topics => kafka_topics, :managers_list => managers_list)
+      notifies :run, "create_topics", :delayed
     end
 
     service "kafka" do
       service_name "kafka"
       supports :status => true, :reload => true, :restart => true, :start => true, :enable => true
       action [:enable,:start]
+    end
+
+    #################################
+    # BASH SCRIPTS
+    #################################
+    bash 'create_topics' do
+      ignore_failure false
+      code <<-EOH
+          source /etc/profile &>/dev/null
+          /usr/lib/redborder/bin/rb_create_topics
+        EOH
+      user user
+      group group
+      action :nothing
     end
 
     Chef::Log.info("Kafka cookbook has been processed")
