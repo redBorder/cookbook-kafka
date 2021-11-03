@@ -14,7 +14,7 @@ action :add do
     port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
-    kafka_topics = ["rb_event", "rb_event_post"
+    kafka_topics = ["rb_event", "rb_event_post",
                     "rb_flow", "rb_flow_post", "rb_flow_discard", 
                     "rb_monitor", "rb_monitor_post",
                     "rb_loc", "rb_locne", "rb_loc_post", "rb_location",
@@ -34,7 +34,7 @@ action :add do
                     "rb_scanner", "rb_scanner_post", 
                     "rb_http2k_sync",
                     "rb_limits", 
-                    "rb_counters"
+                    "rb_counters",
                     "sflow"]
 
 
