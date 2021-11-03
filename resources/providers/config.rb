@@ -162,7 +162,7 @@ action :add do
       mode 0644
       retries 2
       variables(:kafka_topics => kafka_topics, :managers_list => managers_list)
-      notifies :run, "create_topics", :delayed
+      notifies :run, "bash[create_topics]", :delayed
     end
 
     service "kafka" do
