@@ -175,7 +175,7 @@ action :add do
     # BASH SCRIPTS
     #################################
     bash 'create_topics' do
-      ignore_failure :quiet
+      ignore_failure true
       code <<-EOH
           source /etc/profile &>/dev/null
           /usr/lib/redborder/bin/rb_create_topics
