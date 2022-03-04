@@ -21,11 +21,11 @@
 
 listen=*
 advertised.host.name=<%= node.name %>.node
-broker.id=<%= @host_index.nil? ? "?" : "#{@host_index}" %>
+broker.id.generation.enable=true
 port=9092
 max.socket.request.bytes=104857600
 log.dir=/tmp/kafka
-num.partitions=2
+num.partitions=<%= @managers_list.size <= 1 ? 1 : 2 %>
 log.default.flush.interval.ms=1000
 <% if maxbytes<536870912 %>
 log.cleanup.interval.mins=1
