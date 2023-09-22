@@ -24,8 +24,6 @@ action :add do
                     "rb_mobile",
                     "rb_radius",
                     "rb_nmsp",
-                    "rb_social", "rb_social_post",
-                    "rb_hashtag", "rb_hashtag_post",
                     "rb_malware", 
                     "rb_mail",
                     "rb_metrics",
@@ -46,7 +44,7 @@ action :add do
       end
     end   
     namespaces.uniq!
-    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_social_post", "rb_hashtag_post", "rb_state_post", "rb_bi_post", "rb_scanner_post"]
+    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_state_post", "rb_bi_post", "rb_scanner_post"]
     namespaces.each do |ns|
       topics_with_namespaces.each do |topic|
         kafka_topics.push("#{topic}_#{ns}")
