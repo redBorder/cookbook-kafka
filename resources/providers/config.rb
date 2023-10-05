@@ -51,7 +51,7 @@ action :add do
       end
     end
      
-    yum_package "redborder-kafka" do
+    dnf_package "redborder-kafka" do
       action :upgrade
       flush_cache [ :before ]
     end
@@ -232,7 +232,7 @@ action :remove do
       end
     end
 
-    yum_package 'redborder-kafka' do
+    dnf_package 'redborder-kafka' do
       action :remove
     end
 
