@@ -257,7 +257,7 @@ action :register do
          action :nothing
       end.run_action(:run)
 
-      node.set["kafka"]["registered"] = true
+      node.default["kafka"]["registered"] = true
     end
 
     Chef::Log.info("Kafka services has been registered to consul")
@@ -274,7 +274,7 @@ action :deregister do
         action :nothing
       end.run_action(:run)
 
-      node.set["kafka"]["registered"] = false
+      node.default["kafka"]["registered"] = false
     end
 
     Chef::Log.info("Kafka services has been deregistered to consul")
