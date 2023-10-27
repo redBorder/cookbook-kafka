@@ -24,8 +24,6 @@ action :add do
                     "rb_mobile",
                     "rb_radius",
                     "rb_nmsp",
-                    "rb_social", "rb_social_post",
-                    "rb_hashtag", "rb_hashtag_post",
                     "rb_malware", 
                     "rb_mail",
                     "rb_metrics",
@@ -46,20 +44,22 @@ action :add do
       end
     end   
     namespaces.uniq!
-    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_social_post", "rb_hashtag_post", "rb_state_post", "rb_bi_post", "rb_scanner_post"]
+    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_state_post", "rb_bi_post", "rb_scanner_post"]
     namespaces.each do |ns|
       topics_with_namespaces.each do |topic|
         kafka_topics.push("#{topic}_#{ns}")
       end
     end
      
-    yum_package "redborder-kafka" do
+    dnf_package "redborder-kafka" do
       action :upgrade
       flush_cache [ :before ]
     end
 
-    user user do
-      action :create
+    execute "create_user" do
+      command "/usr/sbin/useradd #{user}"
+      ignore_failure true
+      not_if "getent passwd #{user}"
     end
 
     directory logdir do
@@ -178,8 +178,7 @@ action :add do
     bash 'create_topics' do
       ignore_failure true
       code <<-EOH
-          source /etc/profile &>/dev/null
-          /usr/lib/redborder/bin/rb_create_topics
+          rvm ruby-2.7.5@global do /usr/lib/redborder/bin/rb_create_topics
         EOH
       user user
       group group
@@ -234,7 +233,7 @@ action :remove do
       end
     end
 
-    yum_package 'redborder-kafka' do
+    dnf_package 'redborder-kafka' do
       action :remove
     end
 
@@ -259,7 +258,7 @@ action :register do
          action :nothing
       end.run_action(:run)
 
-      node.set["kafka"]["registered"] = true
+      node.normal["kafka"]["registered"] = true
     end
 
     Chef::Log.info("Kafka services has been registered to consul")
@@ -276,7 +275,7 @@ action :deregister do
         action :nothing
       end.run_action(:run)
 
-      node.set["kafka"]["registered"] = false
+      node.normal["kafka"]["registered"] = false
     end
 
     Chef::Log.info("Kafka services has been deregistered to consul")
