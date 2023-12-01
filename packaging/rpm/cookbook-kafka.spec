@@ -45,7 +45,7 @@ esac
 %doc
 
 %changelog
-* Fri Dec 01 2023 Miguel Negrón <manegron@redborder.com> - 1.0.6
+* Fri Dec 01 2023 Miguel Negrón <manegron@redborder.com> - 1.0.7
 - add sync ip support
 * Fri Jan 07 2022 David Vanhoucke <dvanhoucke@redborder.com> - 1.0.2-1
 - change register to consul
