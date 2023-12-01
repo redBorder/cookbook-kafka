@@ -14,6 +14,7 @@ action :add do
     port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
+    ipaddress = new_resource.ipaddress
     
     # Calculate kafka_topics that need to be created
     kafka_topics = ["rb_event", "rb_event_post",
@@ -245,11 +246,12 @@ end
 
 action :register do
   begin
+    ipaddress = new_resource.ipaddress
     if !node["kafka"]["registered"]
       query = {}
       query["ID"] = "kafka-#{node["hostname"]}"
       query["Name"] = "kafka"
-      query["Address"] = "#{node["ipaddress"]}"
+      query["Address"] = ipaddress 
       query["Port"] = 9092
       json_query = Chef::JSONCompat.to_json(query)
 
@@ -269,6 +271,7 @@ end
 
 action :deregister do
   begin
+    ipaddress = new_resource.ipaddress
     if node["kafka"]["registered"]
       execute 'Deregister service in consul' do
         command "curl -X PUT http://localhost:8500/v1/agent/service/deregister/kafka-#{node["hostname"]} &>/dev/null"
