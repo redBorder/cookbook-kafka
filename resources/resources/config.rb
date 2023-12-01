@@ -15,3 +15,4 @@ attribute :zk_hosts, :kind_of => String, :default => "localhost:2181"
 attribute :managers_list, :kind_of => Array, :default => ["localhost"]
 attribute :port, :kind_of => Fixnum, :default => 9092
 attribute :maxsize, :kind_of => Float, :default => 1024.0
+attribute :ipaddress, :kind_of => String, :default => "127.0.0.1"
