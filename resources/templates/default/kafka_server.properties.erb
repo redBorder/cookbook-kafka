@@ -21,7 +21,11 @@
 
 listen=*
 advertised.host.name=<%= node.name %>.node
+<% if @is_proxy %>
+broker.id=0
+<% else %>
 broker.id.generation.enable=true
+<% end %>
 port=9092
 max.socket.request.bytes=104857600
 log.dir=/tmp/kafka
