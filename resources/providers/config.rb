@@ -62,7 +62,6 @@ action :add do
                       "rb_flow",
                       "rb_monitor",
                       "rb_loc",
-                      "test",
                       "rb_nmsp",
                       "rb_social",
                       "rb_state",
