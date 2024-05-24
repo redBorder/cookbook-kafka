@@ -15,7 +15,8 @@ action :add do
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
     ipaddress = new_resource.ipaddress
-    
+    is_proxy = node["redborder"]["is_proxy"]
+    is_manager = node["redborder"]["is_manager"]
     # Calculate kafka_topics that need to be created
     kafka_topics = ["rb_event", "rb_event_post",
                     "rb_flow", "rb_flow_post", "rb_flow_discard", 
@@ -142,7 +143,7 @@ action :add do
       mode 0644
       retries 2
       notifies :restart, "service[kafka]", :delayed
-     variables(:managers_list => managers_list, :host_index => host_index, :zk_hosts => zk_hosts, :maxsize => maxsize )
+     variables(:is_proxy => is_proxy, :managers_list => managers_list, :host_index => host_index, :zk_hosts => zk_hosts, :maxsize => maxsize )
     end
 
     template "/etc/kafka/brokers.list" do
