@@ -18,40 +18,60 @@ action :add do
     is_proxy = node["redborder"]["is_proxy"]
     is_manager = node["redborder"]["is_manager"]
     # Calculate kafka_topics that need to be created
-    kafka_topics = ["rb_event", "rb_event_post",
-                    "rb_flow", "rb_flow_post", "rb_flow_discard", 
-                    "rb_monitor", "rb_monitor_post",
-                    "rb_loc", "rb_locne", "rb_loc_post", "rb_loc_post_discard", "rb_location",
-                    "rb_trap",
-                    "rb_mobile",
-                    "rb_radius",
-                    "rb_nmsp",
-                    "rb_malware", 
-                    "rb_mail",
-                    "rb_metrics",
-                    "rb_state", "rb_state_post",
-                    "rb_meraki",
-                    "rb_vault", "rb_vault_post",
-                    "rb_bi", "rb_bi_post",
-                    "rb_scanner", "rb_scanner_post", 
-                    "rb_http2k_sync",
-                    "rb_limits", 
-                    "rb_counters",
-                    "sflow",
-                    "rb_wireless"]
-    namespaces              = []
-    Chef::Role.list.keys.each do |rol|
-      ro = Chef::Role.load rol
-      if ro and ro.override_attributes["redborder"] and ro.override_attributes["redborder"]["namespace"] and ro.override_attributes["redborder"]["namespace_uuid"] and !ro.override_attributes["redborder"]["namespace_uuid"].empty?
-        namespaces.push(ro.override_attributes["redborder"]["namespace_uuid"])
+    kafka_topics = []
+    if is_manager
+      kafka_topics = ["rb_event", "rb_event_post",
+                      "rb_flow", "rb_flow_post", "rb_flow_discard",
+                      "rb_monitor", "rb_monitor_post",
+                      "rb_loc", "rb_locne", "rb_loc_post", "rb_loc_post_discard", "rb_location",
+                      "rb_trap",
+                      "rb_mobile",
+                      "rb_radius",
+                      "rb_nmsp",
+                      "rb_malware",
+                      "rb_mail",
+                      "rb_metrics",
+                      "rb_state", "rb_state_post",
+                      "rb_meraki",
+                      "rb_vault", "rb_vault_post",
+                      "rb_bi", "rb_bi_post",
+                      "rb_scanner", "rb_scanner_post",
+                      "rb_http2k_sync",
+                      "rb_limits",
+                      "rb_counters",
+                      "sflow",
+                      "rb_wireless"]
+      namespaces              = []
+      Chef::Role.list.keys.each do |rol|
+        ro = Chef::Role.load rol
+        if ro and ro.override_attributes["redborder"] and ro.override_attributes["redborder"]["namespace"] and ro.override_attributes["redborder"]["namespace_uuid"] and !ro.override_attributes["redborder"]["namespace_uuid"].empty?
+          namespaces.push(ro.override_attributes["redborder"]["namespace_uuid"])
+        end
       end
-    end   
-    namespaces.uniq!
-    topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_state_post", "rb_bi_post", "rb_scanner_post", "rb_wireless"]
-    namespaces.each do |ns|
-      topics_with_namespaces.each do |topic|
-        kafka_topics.push("#{topic}_#{ns}")
+      namespaces.uniq!
+      topics_with_namespaces = ["rb_flow_post", "rb_vault_post", "rb_loc_post", "rb_event_post", "rb_monitor_post", "rb_state_post", "rb_bi_post", "rb_scanner_post", "rb_wireless"]
+      namespaces.each do |ns|
+        topics_with_namespaces.each do |topic|
+          kafka_topics.push("#{topic}_#{ns}")
+        end
       end
+    end
+
+    if is_proxy
+      kafka_topics = ["rb_event",
+                      "rb_flow",
+                      "rb_monitor",
+                      "rb_loc",
+                      "rb_nmsp",
+                      "rb_social",
+                      "rb_state",
+                      "rb_radius",
+                      "rb_vault",
+                      "rb_hashtag",
+                      "sflow",
+                      "rb_scanner",
+                      "rb_host_discovery",
+                      "rb_wireless"]
     end
      
     dnf_package "redborder-kafka" do
