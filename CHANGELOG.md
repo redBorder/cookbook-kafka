@@ -1,5 +1,12 @@
 # kafka CHANGELOG
 
+## 1.0.9
+
+  - Miguel Alvarez
+    - [a0413f1] Added pipeline differention between proxy and manager
+    - [6fa2ecd] Fixed proxy on a new kafka broker
+    - [2ce66be] Fixed pipelines auto generation
+
 ## 0.0.6
  [ejimenez]
 - Added redborder-kafka install
@@ -26,4 +33,3 @@
 
 ## 0.0.1
 - [ejimenez] - Initial release
-
