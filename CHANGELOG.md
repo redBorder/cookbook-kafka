@@ -1,10 +1,11 @@
 # kafka CHANGELOG
 
 ## 1.0.9
-[malvads]
-- Added pipeline differention between proxy and manager
-- Fixed proxy on a new kafka broker
-- Fixed pipelines auto generation
+
+  - Miguel Alvarez
+    - [a0413f1] Added pipeline differention between proxy and manager
+    - [6fa2ecd] Fixed proxy on a new kafka broker
+    - [2ce66be] Fixed pipelines auto generation
 
 ## 0.0.6
  [ejimenez]
