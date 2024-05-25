@@ -1,9 +1,8 @@
 name             'kafka'
 maintainer       'Redborder'
-maintainer_email 'ejimenez@redborder.com'
+maintainer_email 'manegron@redborder.com'
 license          'All rights reserved'
 description      'Installs/Configures kafka'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '1.0.9'
 
-depends "zookeeper"
+depends 'zookeeper'
