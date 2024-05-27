@@ -1,4 +1,10 @@
-# kafka CHANGELOG
+cookbook-kafka CHANGELOG
+===============
+
+## 1.0.10
+
+  - Miguel Negron
+    - Fix cookbook lint
 
 ## 1.0.9
 
