@@ -1,9 +1,8 @@
 name             'kafka'
-maintainer       'Redborder'
-maintainer_email 'ejimenez@redborder.com'
-license          'All rights reserved'
+maintainer       'Eneo Tecnología S.L.'
+maintainer_email 'git@redborder.com'
+license          'AGPL-3.0'
 description      'Installs/Configures kafka'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '1.0.9'
 
-depends "zookeeper"
+depends 'zookeeper'
