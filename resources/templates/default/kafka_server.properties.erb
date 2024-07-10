@@ -20,7 +20,7 @@
 #########################################################################
 
 listen=*
-advertised.host.name=<%= node.name %>.node
+advertised.host.name=<%= node['ipaddress'] %>.node
 <% if @is_proxy %>
 broker.id=0
 <% else %>
