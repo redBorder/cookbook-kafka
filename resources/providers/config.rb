@@ -12,6 +12,7 @@ action :add do
     port = new_resource.port
     managers_list = new_resource.managers_list
     maxsize = new_resource.maxsize
+    cdomain = new_resource.cdomain
     is_proxy = node['redborder']['is_proxy']
     is_manager = node['redborder']['is_manager']
     # Calculate kafka_topics that need to be created
@@ -160,7 +161,7 @@ action :add do
       mode '0644'
       retries 2
       notifies :restart, 'service[kafka]', :delayed
-      variables(is_proxy: is_proxy, managers_list: managers_list, host_index: host_index, zk_hosts: zk_hosts, maxsize: maxsize)
+      variables(is_proxy: is_proxy, managers_list: managers_list, host_index: host_index, zk_hosts: zk_hosts, maxsize: maxsize, cdomain: cdomain)
     end
 
     template '/etc/kafka/brokers.list' do
