@@ -9,6 +9,7 @@ attribute :logdir, kind_of: String, default: '/var/log/kafka'
 attribute :user, kind_of: String, default: 'kafka'
 attribute :group, kind_of: String, default: 'kafka'
 attribute :host_index, kind_of: Integer, default: 0
+attribute :cdomain, kind_of: String, default: 'redborder.cluster'
 attribute :zk_hosts, kind_of: String, default: 'localhost:2181'
 attribute :managers_list, kind_of: Array, default: ['localhost']
 attribute :port, kind_of: Integer, default: 9092
