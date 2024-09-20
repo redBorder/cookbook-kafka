@@ -1,6 +1,15 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 1.1.0
+
+  - Miguel Negrón
+    - [a909f27] Merge pull request #20 from redBorder/bugfix/#13550_restrain_login_permision
+    - [7cd25da] Update README.md
+    - [52deeb5] Update rpm.yml
+  - Luis Blanco
+    - [dd1da1a] add nologin param
+
 ## 1.0.10
 
   - Miguel Negron
