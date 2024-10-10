@@ -23,6 +23,9 @@ chmod -R 0755 %{buildroot}/var/chef/cookbooks/kafka
 install -D -m 0644 README.md %{buildroot}/var/chef/cookbooks/kafka/README.md
 
 %pre
+if [ -d /var/chef/cookbooks/kafka ]; then
+    rm -rf /var/chef/cookbooks/kafka
+fi
 
 %post
 case "$1" in
@@ -36,6 +39,12 @@ case "$1" in
   ;;
 esac
 
+%postun
+# Deletes directory when uninstall the package
+if [ "$1" = 0 ] && [ -d /var/chef/cookbooks/kafka ]; then
+  rm -rf /var/chef/cookbooks/kafka
+fi
+
 %files
 %defattr(0755,root,root)
 /var/chef/cookbooks/kafka
@@ -45,9 +54,14 @@ esac
 %doc
 
 %changelog
-* Fri Dec 01 2023 Miguel Negrón <manegron@redborder.com> - 1.0.7
+* Thu Oct 10 2024 Miguel Negrón <manegron@redborder.com>
+- Add pre and postun
+
+* Fri Dec 01 2023 Miguel Negrón <manegron@redborder.com>
 - add sync ip support
-* Fri Jan 07 2022 David Vanhoucke <dvanhoucke@redborder.com> - 1.0.2-1
+
+* Fri Jan 07 2022 David Vanhoucke <dvanhoucke@redborder.com>
 - change register to consul
-* Tue Oct 18 2016 Alberto Rodríguez <arodriguez@redborder.com> - 1.0.0-1
+
+* Tue Oct 18 2016 Alberto Rodríguez <arodriguez@redborder.com>
 - first spec version
