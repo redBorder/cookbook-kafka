@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 1.1.1
+
+  - Miguel Negrón
+    - [e8d7ed5] Add pre and postun to clean the cookbook
+
 ## 1.1.0
 
   - Miguel Negrón
@@ -12,7 +17,7 @@ cookbook-kafka CHANGELOG
 
 ## 1.0.10
 
-  - Miguel Negron
+  - Miguel Negrón
     - Fix cookbook lint
 
 ## 1.0.9
