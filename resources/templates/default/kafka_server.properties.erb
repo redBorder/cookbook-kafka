@@ -41,6 +41,7 @@ log.cleanup.interval.mins=10
 log.segment.bytes=<%= [ [ maxbytes/8, 1073741824 ].min, 1024 * 1024 ].max  %>
 log.retention.hours=120
 log.retention.bytes=<%= maxbytes.to_s %>
+offsets.topic.replication.factor=<%= @managers_list.size <= 1 ? 1 : 2 %>
 default.replication.factor=<%= @managers_list.size <= 1 ? 1 : 2 %>
 <% if !@zk_hosts.nil? and @zk_hosts!="" %>
 zookeeper.connect=<%= @zk_hosts %>
