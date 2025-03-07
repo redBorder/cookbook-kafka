@@ -183,7 +183,7 @@ action :add do
       retries 2
       variables(kafka_topics: kafka_topics, managers_list: managers_list)
       notifies :run, 'bash[create_topics]', :delayed
-      only_if 'nc -zv zookeeper.service 2181'
+      only_if 'nc -zv kafka.service 9092'
     end
 
     service 'kafka' do
