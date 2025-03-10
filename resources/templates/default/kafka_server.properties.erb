@@ -20,6 +20,7 @@
 #########################################################################
 
 listen=*
+listeners=PLAINTEXT://<%= node.name %>.node:9092
 advertised.host.name=<%= node.name %>.node
 <% if @is_proxy %>
 broker.id=0
