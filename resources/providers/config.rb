@@ -174,11 +174,7 @@ action :add do
       notifies :restart, 'service[kafka]', :delayed if host_index >= 0
     end
 
-    if is_manager
-      bootstrap_server = "#{node['name']}.node"
-    else
-      bootstrap_server = 'kafka.service'
-    end
+    bootstrap_server = is_manager ? "#{node['name']}.node" : 'kafka.service'
 
     template '/etc/kafka/topics_definitions.yml' do
       source 'topics_definitions.yml.erb'
