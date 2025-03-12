@@ -173,7 +173,13 @@ action :add do
       variables(managers_list: managers_list, port: port)
       notifies :restart, 'service[kafka]', :delayed if host_index >= 0
     end
-
+    
+    if is_manager
+      bootstrap_server = "#{node['name']}.node"
+    else
+      bootstrap_server = 'kafka.service'
+    end
+    
     template '/etc/kafka/topics_definitions.yml' do
       source 'topics_definitions.yml.erb'
       owner user
@@ -183,7 +189,7 @@ action :add do
       retries 2
       variables(kafka_topics: kafka_topics, managers_list: managers_list)
       notifies :run, 'bash[create_topics]', :delayed
-      only_if 'nc -zv kafka.service 9092'
+      only_if "nc -zv #{bootstrap_server} 9092"
     end
 
     service 'kafka' do
