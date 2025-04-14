@@ -19,9 +19,8 @@
 # INFO: hostname -> <%= node.name %>
 #########################################################################
 
-listen=*
-listeners=PLAINTEXT://<%= node.name %>.node:9092
-advertised.host.name=<%= node.name %>.node
+listeners=PLAINTEXT://0.0.0.0:9092
+advertised.listeners=PLAINTEXT://<%= node.name %>.node:9092
 <% if @is_proxy %>
 broker.id=0
 <% else %>
