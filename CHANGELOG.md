@@ -1,6 +1,15 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 1.2.0
+
+  - David Vanhoucke
+    - [9c83148] listen to all interfaces
+  - Miguel Alvarez
+    - [8bd25f6] Fix kafka server properties
+    - [960958d] Fix kafka check create topics
+    - [d84f3dc] Fix offset replication factor
+
 ## 1.1.1
 
   - Miguel Negrón
