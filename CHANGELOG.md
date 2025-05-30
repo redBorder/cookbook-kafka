@@ -1,6 +1,13 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 1.3.0
+
+  - Miguel Negrón
+    - [e26d375] Merge pull request #27 from redBorder/feature/#21232_refactor_license_system_ng
+  - Rafael Gomez
+    - [9583295] Fix typo in kafka_topics array for flow_post_discard
+
 ## 1.2.0
 
   - David Vanhoucke
