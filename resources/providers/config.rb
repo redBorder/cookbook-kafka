@@ -18,7 +18,7 @@ action :add do
     kafka_topics = []
     if is_manager
       kafka_topics = %w(rb_event rb_event_post
-                      rb_flow rb_flow_post rb_flow_discard
+                      rb_flow rb_flow_post rb_flow_post_discard
                       rb_monitor rb_monitor_post
                       rb_loc rb_locne rb_loc_post rb_loc_post_discard rb_location
                       rb_trap
