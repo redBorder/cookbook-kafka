@@ -1,6 +1,14 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.0.0
+
+  - Miguel Negrón
+    - [a8c53f1] Merge pull request #29 from redBorder/bugfix/#21513_minimum_number_of_topic_default_partitions_should_be_2_for_1_node
+  - Rafael Gomez
+    - [d5d5934] Fix num.partitions to a static value of 2 in kafka_server.properties.erb
+    - [fd10c61] Fix partitions value to a static number in topics_definitions.yml.erb
+
 ## 1.3.0
 
   - Miguel Negrón

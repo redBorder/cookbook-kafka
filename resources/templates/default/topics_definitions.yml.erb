@@ -2,5 +2,5 @@ topics:
 <% @kafka_topics.each do |topic| %>
   - <%=topic%>
 <%end %>
-partitions: <%= @managers_list.size <= 1 ? 1 : 2 %>
+partitions: 2
 replication: <%= @managers_list.size <= 1 ? 1 : 2 %>
