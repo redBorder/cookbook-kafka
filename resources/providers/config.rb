@@ -73,7 +73,6 @@ action :add do
 
     dnf_package 'redborder-kafka' do
       action :upgrade
-      flush_cache [ :before ]
     end
 
     execute 'create_user' do
@@ -196,7 +195,7 @@ action :add do
     # BASH SCRIPTS
     #################################
     bash 'create_topics' do
-      ignore_failure true
+      ignore_failure false
       code <<-EOH
           rvm ruby-2.7.5@global do /usr/lib/redborder/bin/rb_create_topics
         EOH
