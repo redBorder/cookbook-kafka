@@ -18,7 +18,7 @@ action :add do
     kafka_topics = []
     if is_manager
       kafka_topics = %w(rb_event rb_event_post
-                      rb_flow rb_flow_post rb_flow_discard
+                      rb_flow rb_flow_post rb_flow_post_discard
                       rb_monitor rb_monitor_post
                       rb_loc rb_locne rb_loc_post rb_loc_post_discard rb_location
                       rb_trap
@@ -173,6 +173,8 @@ action :add do
       notifies :restart, 'service[kafka]', :delayed if host_index >= 0
     end
 
+    bootstrap_server = is_manager ? "#{node['name']}.node" : 'kafka.service'
+
     template '/etc/kafka/topics_definitions.yml' do
       source 'topics_definitions.yml.erb'
       owner user
@@ -182,7 +184,7 @@ action :add do
       retries 2
       variables(kafka_topics: kafka_topics, managers_list: managers_list)
       notifies :run, 'bash[create_topics]', :delayed
-      only_if 'nc -zv zookeeper.service 2181'
+      only_if "nc -zv #{bootstrap_server} 9092"
     end
 
     service 'kafka' do

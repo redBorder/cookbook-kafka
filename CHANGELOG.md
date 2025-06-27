@@ -1,6 +1,30 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.0.0
+
+  - Miguel Negrón
+    - [a8c53f1] Merge pull request #29 from redBorder/bugfix/#21513_minimum_number_of_topic_default_partitions_should_be_2_for_1_node
+  - Rafael Gomez
+    - [d5d5934] Fix num.partitions to a static value of 2 in kafka_server.properties.erb
+    - [fd10c61] Fix partitions value to a static number in topics_definitions.yml.erb
+
+## 1.3.0
+
+  - Miguel Negrón
+    - [e26d375] Merge pull request #27 from redBorder/feature/#21232_refactor_license_system_ng
+  - Rafael Gomez
+    - [9583295] Fix typo in kafka_topics array for flow_post_discard
+
+## 1.2.0
+
+  - David Vanhoucke
+    - [9c83148] listen to all interfaces
+  - Miguel Alvarez
+    - [8bd25f6] Fix kafka server properties
+    - [960958d] Fix kafka check create topics
+    - [d84f3dc] Fix offset replication factor
+
 ## 1.1.1
 
   - Miguel Negrón
