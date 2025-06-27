@@ -73,7 +73,6 @@ action :add do
 
     dnf_package 'redborder-kafka' do
       action :upgrade
-      flush_cache [ :before ]
     end
 
     execute 'create_user' do

@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.0.1
+
+  - nilsver
+    - [63e2133] remove flush cache
+
 ## 2.0.0
 
   - Miguel Negrón
