@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.0.2
+
+  - jnavarrorb
+    - [c341fab] Remove executable permissions on non-executable files
+
 ## 2.0.1
 
   - nilsver
