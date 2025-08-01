@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.1.0
+
+  - Pablo Pérez
+    - [634ea48] Add rb_malware and rb_malware_post with namespaces
+
 ## 2.0.2
 
   - jnavarrorb
