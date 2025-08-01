@@ -37,7 +37,8 @@ action :add do
                       rb_limits
                       rb_counters
                       sflow
-                      rb_wireless)
+                      rb_wireless
+                      rb_malware rb_malware_post)
       namespaces = []
       Chef::Role.list.each_key do |rol|
         ro = Chef::Role.load rol
@@ -46,7 +47,7 @@ action :add do
         end
       end
       namespaces.uniq!
-      topics_with_namespaces = %w(rb_flow_post rb_vault_post rb_loc_post rb_event_post rb_monitor_post rb_state_post rb_bi_post rb_scanner_post rb_wireless)
+      topics_with_namespaces = %w(rb_flow_post rb_vault_post rb_loc_post rb_event_post rb_monitor_post rb_state_post rb_bi_post rb_scanner_post rb_wireless rb_malware_post)
       namespaces.each do |ns|
         topics_with_namespaces.each do |topic|
           kafka_topics.push("#{topic}_#{ns}")
