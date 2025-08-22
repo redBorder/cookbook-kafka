@@ -25,7 +25,6 @@ action :add do
                       rb_mobile
                       rb_radius
                       rb_nmsp
-                      rb_malware
                       rb_mail
                       rb_metrics
                       rb_state rb_state_post

@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.1.1
+
+  - Rafael Gomez
+    - [113f52e] Remove an entrie of rb_malware in kafka_topics list
+
 ## 2.1.0
 
   - Pablo Pérez
