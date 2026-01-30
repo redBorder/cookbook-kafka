@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.1.2
+
+  - manegron
+    - [6b7c1c1] Rescue get rol
+
 ## 2.1.1
 
   - Rafael Gomez
