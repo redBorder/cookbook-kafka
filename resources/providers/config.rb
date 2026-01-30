@@ -40,7 +40,12 @@ action :add do
                       rb_malware rb_malware_post)
       namespaces = []
       Chef::Role.list.each_key do |rol|
-        ro = Chef::Role.load rol
+        ro = nil
+        begin
+          ro = Chef::Role.load rol
+        rescue
+          Chef::Log.error("[get_namespaces] Failed to load role: #{rol}")
+        end
         if ro && ro.override_attributes['redborder'] && ro.override_attributes['redborder']['namespace'] && ro.override_attributes['redborder']['namespace_uuid'] && !ro.override_attributes['redborder']['namespace_uuid'].empty?
           namespaces.push(ro.override_attributes['redborder']['namespace_uuid'])
         end
