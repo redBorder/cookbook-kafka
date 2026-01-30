@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 2.1.3
+
+  - manegron
+    - [3e39ebc] Minimal change in log message
+
 ## 2.1.2
 
   - manegron
