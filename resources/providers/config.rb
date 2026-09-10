@@ -21,7 +21,7 @@ action :add do
                       rb_flow rb_flow_post rb_flow_post_discard
                       rb_monitor rb_monitor_post
                       rb_loc rb_locne rb_loc_post rb_loc_post_discard rb_location
-                      rb_trap
+                      rb_trap rb_trap_post
                       rb_mobile
                       rb_radius
                       rb_nmsp
@@ -51,7 +51,7 @@ action :add do
         end
       end
       namespaces.uniq!
-      topics_with_namespaces = %w(rb_flow_post rb_vault_post rb_loc_post rb_event_post rb_monitor_post rb_state_post rb_bi_post rb_scanner_post rb_wireless rb_malware_post)
+      topics_with_namespaces = %w(rb_flow_post rb_vault_post rb_loc_post rb_event_post rb_monitor_post rb_state_post rb_bi_post rb_scanner_post rb_wireless rb_malware_post rb_trap_post)
       namespaces.each do |ns|
         topics_with_namespaces.each do |topic|
           kafka_topics.push("#{topic}_#{ns}")
