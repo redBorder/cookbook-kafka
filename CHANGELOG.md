@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 3.0.0
+
+  - José Jiménez
+    - [33b7a25] Add rb_trap_post
+
 ## 2.1.3
 
   - manegron
