@@ -1,6 +1,11 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 3.0.1
+
+  - manegron
+    - [d04ef11] Upload cookbook only if opscode-erchef is active
+
 ## 3.0.0
 
   - José Jiménez
