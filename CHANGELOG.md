@@ -1,6 +1,14 @@
 cookbook-kafka CHANGELOG
 ===============
 
+## 4.0.0
+
+  - Miguel Negrón
+    - [7386fce] Merge pull request #43 from redBorder/improvement/#26884_remove_ruby_2_7_5
+  - manegron
+    - [7386fce] Merge pull request #43 from redBorder/improvement/#26884_remove_ruby_2_7_5
+    - [db5ed57] Remove ruby-2.7.5
+
 ## 3.0.1
 
   - manegron
