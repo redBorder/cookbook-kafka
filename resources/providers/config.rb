@@ -204,7 +204,7 @@ action :add do
     bash 'create_topics' do
       ignore_failure true
       code <<-EOH
-          rvm ruby-2.7.5@global do /usr/lib/redborder/bin/rb_create_topics
+          rvm ruby-3.4.11@global do /usr/lib/redborder/bin/rb_create_topics
         EOH
       user user
       group group
